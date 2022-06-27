@@ -12,8 +12,8 @@ services:
 #docker run -d --restart=always --name=reader -e "SPRING_PROFILES_ACTIVE=prod" -e "READER_APP_SECURE=true" -e "READER_APP_SECUREKEY=管理密码" -e "READER_APP_INVITECODE=注册邀请码" -v $(pwd)/logs:/logs -v $(pwd)/storage:/storage -p 8080:8080 hectorqin/reader
 
   reader:
-    image: hectorqin/reader
-    #image: hectorqin/reader:openj9-latest #docker镜像，arm64架构和小内存机器可以使用
+#     image: hectorqin/reader
+    image: hectorqin/reader:openj9-latest #docker镜像，arm64架构和小内存机器可以使用
     container_name: reader #容器名 可自行修改
     restart: always
     #限制镜像最大资源占用(可选) 低内存(<=2G)可考虑限制 使用此方式启动需加--compatibility,例如   docker-compose --compatibility up -d
@@ -26,7 +26,7 @@ services:
           #cpus: 0.25
           #memory: 256M
     ports:
-      - 4396:80 #4396端口映射可自行修改
+      - 4396:8080 #4396端口映射可自行修改
     volumes:
       - /home/reader/logs:/logs #log映射目录 /home/reader/logs 映射目录可自行修改
       - /home/reader/storage:/storage #数据映射目录 /home/reader/storage 映射目录可自行修改
